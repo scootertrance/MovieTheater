@@ -24,8 +24,12 @@ public class OrderDataSource {
             new Position(0,0),new Position(0,1)));
         orderList.add(new Order(2, clientDataSource.getClientById(2), movieSessionDataSource.getMovieSessionById(2),
                 new Position(1,0),new Position(1,1),new Position(1,2)));
-        orderList.add(new Order(1, clientDataSource.getClientById(1), movieSessionDataSource.getMovieSessionById(1),
+        orderList.add(new Order(3, clientDataSource.getClientById(3), movieSessionDataSource.getMovieSessionById(1),
                 new Position(2,0),new Position(2,1), new Position(2,2),
                 new Position(2,3)));
+    }
+
+    public ArrayList<Order> getOrderList() {
+        return orderList;
     }
 }

@@ -6,7 +6,4 @@ import java.util.Random;
 
 public class ClientApp {
 
-
-
-    Order order = new Order(newOrderId
 }

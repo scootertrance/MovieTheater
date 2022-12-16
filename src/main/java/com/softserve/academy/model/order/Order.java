@@ -16,13 +16,16 @@ public class Order  {
     private int id;
     private LocalDate orderDate;
     private Client client;
-    private ArrayList<MovieSessionSeat> seats;
     private MovieSession movieSession;
+    private ArrayList<MovieSessionSeat> seats;
 
     public Order(int id, Client client, MovieSession movieSession, Position...positions) throws
             SeatAvailabilityException, RoomException {
         this.id = id;
         this.orderDate = java.time.LocalDate.now();
+        this.client = client;
+        this.movieSession = movieSession;
+        this.seats = new ArrayList<>();
 
         for (int i = 0; i < positions.length; i++) {
             reserveSeat(positions[i].getRow(), positions[i].getPlaceInRow());
@@ -62,5 +65,12 @@ public class Order  {
 
     public MovieSession getMovieSession() {
         return movieSession;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\nOrder id: %d\nTotal price: %.2f UAH\nOrder date: %s\nClient: %s %s, %s ",
+                this.getId(),this.getTotalPrice(),this.getOrderDate(),this.client.getName(), this.client.getSurname(),
+                this.getClient().getEmail());
     }
 }

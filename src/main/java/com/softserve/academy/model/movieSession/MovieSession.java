@@ -148,7 +148,7 @@ public class MovieSession {
         double price = this.getPrice();
 
 
-        return String.format("Room number: %d\nShow date: %s, %s, %d\nShow time: %d:%d\nPrice: %.2f UAH\n" +
+        return String.format("Room number: %d\nShow date: %s, %s, %d\nShow time: %d:%d\nTicket price: %.2f UAH\n" +
                         "Available seats: %d\n",
                 this.getRoom().getRoomNumber(), dayOfWeek, month, day, hour, minute, price, availableSeats);
     }
@@ -176,6 +176,7 @@ public class MovieSession {
     public Movie getMovie() {
         return movie;
     }
+
 }
 
 
