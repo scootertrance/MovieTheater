@@ -14,23 +14,25 @@ public class Room {
 
     public Room(int roomNumber, int rows, int placesInRow) throws RoomException {
 
-        if(rows <= 0 || placesInRow <= 0) {
-            throw new RoomException("The room must contain at least one seat");
-        }
+//        if(rows <= 0 || placesInRow <= 0) {
+//            throw new RoomException("The room must contain at least one seat");
+//        }
+        this.roomNumber = roomNumber;
+        this.placesInRow = placesInRow;
+        this.rows = rows;
+        this.seats = initializeSeats(rows, placesInRow);
+    }
 
-        this.seats = new ArrayList<>();
-
+    private ArrayList<ArrayList<PhysicalSeat>> initializeSeats(int rows, int placesInRow) {
+        ArrayList<ArrayList<PhysicalSeat>> seatsList = new ArrayList<>();
         for (int i = 0; i < rows; i++) {
             ArrayList<PhysicalSeat> row = new ArrayList<>();
             for (int j = 0; j < placesInRow; j++) {
                 row.add(new PhysicalSeat(TypeOfSeat.Standard));
             }
-            seats.add(row);
+            seatsList.add(row);
         }
-
-        this.roomNumber = roomNumber;
-        this.placesInRow = placesInRow;
-        this.rows = rows;
+        return seatsList;
     }
 
     public int getNumberOfSeats() {

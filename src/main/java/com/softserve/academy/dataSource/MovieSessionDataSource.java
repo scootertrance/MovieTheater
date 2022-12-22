@@ -29,7 +29,24 @@ public class MovieSessionDataSource{
         movieSessionsList.add(new MovieSession(3, movieDataSource.getMovieById(3),
                 roomDataSource.getRoomByRoomNumber(3), LocalDateTime.of(2023,1,1,14,0),
                 250));
+        movieSessionsList.add(new MovieSession(4, movieDataSource.getMovieById(3),
+                roomDataSource.getRoomByRoomNumber(3), LocalDateTime.of(2023,1,1,17,0),
+                250));
+
     }
+
+    public ArrayList<MovieSession> getMovieSessionsList() {
+        return movieSessionsList;
+    }
+
+    public MovieDataSource getMovieDataSource() {
+        return movieDataSource;
+    }
+
+    public RoomDataSource getRoomDataSource() {
+        return roomDataSource;
+    }
+
     public MovieSession getMovieSessionById(int id) {
         for(MovieSession movieSession : movieSessionsList){
             if(movieSession.getId() == id) {
@@ -37,5 +54,15 @@ public class MovieSessionDataSource{
             }
         }
         return null;
+    }
+
+    public ArrayList<MovieSession> getMovieSessionByMovieId(int id) {
+        ArrayList<MovieSession> movieSessionByIdList = new ArrayList<>();
+        for(MovieSession movieSession : movieSessionsList) {
+            if(movieSession.getMovie().getId() == id) {
+                movieSessionByIdList.add(movieSession);
+            }
+        }
+        return movieSessionByIdList;
     }
 }

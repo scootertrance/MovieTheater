@@ -1,6 +1,12 @@
 package com.softserve.academy;
 
 import com.softserve.academy.controller.OrderController;
+import com.softserve.academy.model.Movie;
+import com.softserve.academy.model.Position;
+import com.softserve.academy.model.movieSession.MovieSession;
+import com.softserve.academy.model.movieSession.MovieSessionSeat;
+
+import java.util.ArrayList;
 
 public class Output {
     private OrderController orderController;
@@ -18,6 +24,20 @@ public class Output {
     }
 
     public void printOrdersByClientEmail(String email){
-        System.out.printf("Orders for client with email %s:\n%s\n\n",email,orderController.getOrdersByClientEmail(email));
+        System.out.printf("Orders for client with email %s:\n%s\n\n",email,orderController.
+                getOrdersByClientEmail(email));
+    }
+
+    public void printMovieList() {
+        for(Movie movie: orderController.getOrderDataSource().getMovieSessionDataSource().getMovieDataSource().
+                getMovies()) {
+            System.out.println(movie);
+        }
+    }
+    public void printMovieSessionByMovieId(int movieId) {
+        for(MovieSession movieSession : orderController.getOrderDataSource().getMovieSessionDataSource().
+                getMovieSessionByMovieId(movieId)){
+            System.out.println(movieSession);
+        }
     }
 }

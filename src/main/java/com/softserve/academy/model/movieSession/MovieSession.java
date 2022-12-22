@@ -1,6 +1,7 @@
 package com.softserve.academy.model.movieSession;
 
 import com.softserve.academy.model.Movie;
+import com.softserve.academy.model.Position;
 import com.softserve.academy.model.cinema.PhysicalSeat;
 import com.softserve.academy.model.cinema.Room;
 import com.softserve.academy.model.cinema.util.RoomException;
@@ -25,9 +26,12 @@ public class MovieSession {
         this.room = room;
         this.dateTime = dateTime;
         this.price = price;
+        this.seats = initializeSeats(room);
 
-        this.seats = new ArrayList<>();
+    }
 
+    private ArrayList<ArrayList<MovieSessionSeat>> initializeSeats(Room room) {
+        ArrayList<ArrayList<MovieSessionSeat>> seatsList = new ArrayList<>();
         for (int i = 0; i < room.getNumberOfRows(); i++) {
             ArrayList<MovieSessionSeat> row = new ArrayList<>();
 
@@ -35,9 +39,12 @@ public class MovieSession {
                 row.add(new MovieSessionSeat(room.getSeat(i,j),true));
             }
 
-            seats.add(row);
+            seatsList.add(row);
         }
+        return seatsList;
     }
+
+
 
     public void setId(int id) throws MovieSessionException {
         if (id < 0)
@@ -56,6 +63,7 @@ public class MovieSession {
         }
         for (int i = 0; i < room.getNumberOfRows(); i++) {
             ArrayList<MovieSessionSeat> row = new ArrayList<>();
+
             for (int j = 0; j < room.getNumberOfPlacesInRow(); j++) {
                 row.add(new MovieSessionSeat(room.getSeat(i, j), true));
             }
@@ -96,6 +104,7 @@ public class MovieSession {
         return availableSeats;
     }
 
+
     public boolean takeSeat(int row, int place) throws RoomException {
         if (checkIfSeatIsAvailable(row, place)) {
             seats.get(row).get(place).setAvailable(false);
@@ -116,17 +125,17 @@ public class MovieSession {
         return this.getSeats().get(row).get(place).getPhysicalSeat();
     }
 
-    public int[] getSeatCoordinates(PhysicalSeat s) throws RoomException {
-        int[] seatCoordinates = new int[2];
-        for (int i = 0; i < room.getNumberOfRows(); i++) {
-            for (int j = 0; j < room.getNumberOfPlacesInRow(); j++) {
-                if (getPhysicalSeat(i, j) == s)
-                    seatCoordinates[0]= i;
-                    seatCoordinates[1]= j;
-                    return seatCoordinates;
+
+    public ArrayList<Position> getSeatCoordinates(){
+        ArrayList<Position> positionArrayList = new ArrayList<>();
+        for (int i = 0; i < seats.size(); i++) {
+            for (int j = 0; j < seats.get(i).size(); j++) {
+                if(!seats.get(i).get(j).isAvailable()){
+                    positionArrayList.add(new Position(i,j));
+                }
             }
         }
-        return null;
+        return positionArrayList;
     }
 
     @Override
@@ -148,9 +157,9 @@ public class MovieSession {
         double price = this.getPrice();
 
 
-        return String.format("Room number: %d\nShow date: %s, %s, %d\nShow time: %d:%d\nTicket price: %.2f UAH\n" +
+        return String.format("Movie session number: %d\nRoom number: %d\nShow date: %s, %s, %d\nShow time: %d:%d\nTicket price: %.2f UAH\n" +
                         "Available seats: %d\n",
-                this.getRoom().getRoomNumber(), dayOfWeek, month, day, hour, minute, price, availableSeats);
+                this.getId(), this.getRoom().getRoomNumber(), dayOfWeek, month, day, hour, minute, price, availableSeats);
     }
 
     public double getPrice() {

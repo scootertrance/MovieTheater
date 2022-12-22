@@ -4,11 +4,13 @@ import com.softserve.academy.model.Movie;
 import com.softserve.academy.model.cinema.Room;
 import com.softserve.academy.model.cinema.util.RoomException;
 import com.softserve.academy.model.client.Client;
+import com.softserve.academy.model.order.Order;
 
 import java.util.ArrayList;
 
 public class ClientDataSource {
     private ArrayList<Client> clientList = new ArrayList<>();
+    private static int newId = 0;
 
     public ClientDataSource()  {
         initialClientData();
@@ -28,5 +30,16 @@ public class ClientDataSource {
             }
         }
         return null;
+    }
+    public void addNewClient(Client client) {
+        clientList.add(client);
+    }
+    public int getNewClientId() {
+        for(Client client : this.getClients()) {
+            if(newId < client.getId()) {
+                newId = client.getId();
+            }
+        }
+        return newId + 1;
     }
 }

@@ -19,24 +19,24 @@ public class Order  {
     private MovieSession movieSession;
     private ArrayList<MovieSessionSeat> seats;
 
-    public Order(int id, Client client, MovieSession movieSession, Position...positions) throws
+    public Order(int id, Client client, MovieSession movieSession, ArrayList<Position> positions) throws
             SeatAvailabilityException, RoomException {
         this.id = id;
         this.orderDate = java.time.LocalDate.now();
         this.client = client;
         this.movieSession = movieSession;
-        this.seats = new ArrayList<>();
-
-        for (int i = 0; i < positions.length; i++) {
-            reserveSeat(positions[i].getRow(), positions[i].getPlaceInRow());
-        }
-
+        this.seats = reserveSeat(positions);
     }
-    public void reserveSeat(int row, int place) throws RoomException, SeatAvailabilityException {
-        if(movieSession.takeSeat(row, place)) {
-            seats.add(movieSession.getSeats().get(row).get(place));
+
+    public final ArrayList<MovieSessionSeat> reserveSeat(ArrayList<Position> positions) throws RoomException, SeatAvailabilityException {
+        ArrayList<MovieSessionSeat> seatsList = new ArrayList<>();
+        for (int i = 0; i < positions.size(); i++){
+            if(movieSession.takeSeat(positions.get(i).getRow(), positions.get(i).getPlaceInRow())) {
+                seatsList.add(movieSession.getSeats().get(positions.get(i).getRow()).get(positions.get(i).getPlaceInRow()));
+            }
+            else throw new SeatAvailabilityException("Selected seats is already taken");
         }
-        else throw new SeatAvailabilityException("Selected seats is already taken");
+        return seatsList;
     }
 
     public int getNumberOfSeats() {
@@ -67,10 +67,29 @@ public class Order  {
         return movieSession;
     }
 
+    public String getPositionsInfo(ArrayList<Position> positions){
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        sb.append("\nYour seats:\n");
+        for(Position position : positions){
+            count++;
+            sb.append("\n---------\nSeat № ");
+            sb.append(count);
+            sb.append(":\nRow: ");
+            sb.append(position.getRow());
+            sb.append("\nPlace: ");
+            sb.append(position.getPlaceInRow());
+        }
+        sb.append("\n---------\n");
+        return sb.toString();
+    }
+
+
     @Override
     public String toString() {
         return String.format("\nOrder id: %d\nTotal price: %.2f UAH\nOrder date: %s\nClient: %s %s, %s ",
                 this.getId(),this.getTotalPrice(),this.getOrderDate(),this.client.getName(), this.client.getSurname(),
                 this.getClient().getEmail());
     }
+
 }
