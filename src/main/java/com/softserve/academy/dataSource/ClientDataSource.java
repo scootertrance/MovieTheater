@@ -1,26 +1,29 @@
 package com.softserve.academy.dataSource;
 
-import com.softserve.academy.model.Movie;
-import com.softserve.academy.model.cinema.Room;
-import com.softserve.academy.model.cinema.util.RoomException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserve.academy.model.client.Client;
-import com.softserve.academy.model.order.Order;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ClientDataSource {
     private ArrayList<Client> clientList = new ArrayList<>();
     private static int newId = 0;
 
-    public ClientDataSource()  {
+    public ClientDataSource() throws IOException {
         initialClientData();
     }
 
-    public void initialClientData() {
-        clientList.add(new Client(1,"John", "Doe", "john.doe@gmail.com"));
-        clientList.add(new Client(2,"Barack", "Obama", "barack.obama@gmail.com"));
-        clientList.add(new Client(3,"Joe", "Biden", "joe.biden@gmail.com"));
+    public void initialClientData() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        clientList = mapper.readValue(new File(
+                        "src/main/java/com/softserve/academy/resources/clientList.json"),
+                new TypeReference<>() {});
     }
+
+
     public ArrayList<Client> getClients() {return clientList;}
 
     public Client getClientById(int id) {
@@ -31,8 +34,16 @@ public class ClientDataSource {
         }
         return null;
     }
-    public void addNewClient(Client client) {
+    public void addNewClient(Client client) throws IOException {
         clientList.add(client);
+        updateClientsJSON();
+    }
+
+    public void updateClientsJSON() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(new File(
+                        "src/main/java/com/softserve/academy/resources/clientList.json"),
+                clientList);
     }
     public int getNewClientId() {
         for(Client client : this.getClients()) {

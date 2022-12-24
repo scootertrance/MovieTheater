@@ -13,6 +13,9 @@ public class Client {
         this.email = email;
     }
 
+    public Client() {
+    }
+
     public String getName() {
         return name;
     }

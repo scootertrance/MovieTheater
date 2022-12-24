@@ -1,5 +1,6 @@
 package com.softserve.academy.model.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.softserve.academy.model.Position;
 import com.softserve.academy.model.cinema.util.RoomException;
 import com.softserve.academy.model.client.Client;
@@ -28,6 +29,9 @@ public class Order  {
         this.seats = reserveSeat(positions);
     }
 
+    public Order() {
+    }
+
     public final ArrayList<MovieSessionSeat> reserveSeat(ArrayList<Position> positions) throws RoomException, SeatAvailabilityException {
         ArrayList<MovieSessionSeat> seatsList = new ArrayList<>();
         for (int i = 0; i < positions.size(); i++){
@@ -38,11 +42,13 @@ public class Order  {
         }
         return seatsList;
     }
-
+    @JsonIgnore
     public int getNumberOfSeats() {
         return seats.size();
     }
 
+
+    @JsonIgnore
     public double getTotalPrice() {
         return Math.round(getNumberOfSeats() * this.movieSession.getPrice() * 100) / 100;
     }
@@ -87,9 +93,10 @@ public class Order  {
 
     @Override
     public String toString() {
-        return String.format("\nOrder id: %d\nTotal price: %.2f UAH\nOrder date: %s\nClient: %s %s, %s ",
-                this.getId(),this.getTotalPrice(),this.getOrderDate(),this.client.getName(), this.client.getSurname(),
-                this.getClient().getEmail());
+        return String.format("\nOrder id: %d\nMovie: %s\nRoom: %d\nTotal price: %.2f UAH\nOrder date: %s\nClient: %s %s, %s %s",
+                this.getId(),this.getMovieSession().getMovie().getTitle(), this.getMovieSession().getRoom().getRoomNumber(),
+                this.getTotalPrice(),this.getOrderDate(),this.client.getName(), this.client.getSurname(),
+                this.getClient().getEmail(), this.getPositionsInfo(movieSession.getSeatCoordinates(seats)));
     }
 
 }

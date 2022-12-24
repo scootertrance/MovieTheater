@@ -1,5 +1,7 @@
 package com.softserve.academy.model.movieSession;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softserve.academy.model.Movie;
 import com.softserve.academy.model.Position;
 import com.softserve.academy.model.cinema.PhysicalSeat;
@@ -30,12 +32,15 @@ public class MovieSession {
 
     }
 
+    public MovieSession() {
+    }
+
     private ArrayList<ArrayList<MovieSessionSeat>> initializeSeats(Room room) {
         ArrayList<ArrayList<MovieSessionSeat>> seatsList = new ArrayList<>();
-        for (int i = 0; i < room.getNumberOfRows(); i++) {
+        for (int i = 0; i < room.getRows(); i++) {
             ArrayList<MovieSessionSeat> row = new ArrayList<>();
 
-            for (int j = 0; j < room.getNumberOfPlacesInRow(); j++) {
+            for (int j = 0; j < room.getPlacesInRow(); j++) {
                 row.add(new MovieSessionSeat(room.getSeat(i,j),true));
             }
 
@@ -56,19 +61,24 @@ public class MovieSession {
         this.movie = movie;
     }
 
+//    public void setRoom(Room room) {
+//        this.room = room;
+//        if (seats.size() != 0) {
+//            seats.removeAll(seats);
+//        }
+//        for (int i = 0; i < room.getRows(); i++) {
+//            ArrayList<MovieSessionSeat> row = new ArrayList<>();
+//
+//            for (int j = 0; j < room.placesInRow(); j++) {
+//                row.add(new MovieSessionSeat(room.getSeat(i, j), true));
+//            }
+//            seats.add(row);
+//        }
+//    }
+
+
     public void setRoom(Room room) {
         this.room = room;
-        if (seats.size() != 0) {
-            seats.removeAll(seats);
-        }
-        for (int i = 0; i < room.getNumberOfRows(); i++) {
-            ArrayList<MovieSessionSeat> row = new ArrayList<>();
-
-            for (int j = 0; j < room.getNumberOfPlacesInRow(); j++) {
-                row.add(new MovieSessionSeat(room.getSeat(i, j), true));
-            }
-            seats.add(row);
-        }
     }
 
     public void setDateTime(LocalDateTime dateTime) throws MovieSessionException {
@@ -91,11 +101,11 @@ public class MovieSession {
                     "Selected place does not exist.");
         }
     }
-
+    @JsonIgnore
     public int getNumberAvailableSeats() throws RoomException {
         int availableSeats = 0;
-        for (int i = 0; i < this.getRoom().getNumberOfRows(); i++) {
-            for (int j = 0; j < this.getRoom().getNumberOfPlacesInRow(); j++) {
+        for (int i = 0; i < this.getRoom().getRows(); i++) {
+            for (int j = 0; j < this.getRoom().getPlacesInRow(); j++) {
                 if (checkIfSeatIsAvailable(i, j)) {
                     availableSeats++;
                 }
@@ -126,12 +136,18 @@ public class MovieSession {
     }
 
 
-    public ArrayList<Position> getSeatCoordinates(){
+
+    public ArrayList<Position> getSeatCoordinates(ArrayList<MovieSessionSeat> orderSeats){
         ArrayList<Position> positionArrayList = new ArrayList<>();
         for (int i = 0; i < seats.size(); i++) {
             for (int j = 0; j < seats.get(i).size(); j++) {
                 if(!seats.get(i).get(j).isAvailable()){
-                    positionArrayList.add(new Position(i,j));
+                    for (int k = 0; k < orderSeats.size(); k++) {
+                        if(seats.get(i).get(j).equals(orderSeats.get(k))){
+                            positionArrayList.add(new Position(i,j));
+                        }
+                    }
+
                 }
             }
         }
@@ -186,6 +202,9 @@ public class MovieSession {
         return movie;
     }
 
+    public void setSeats(ArrayList<ArrayList<MovieSessionSeat>> seats) {
+        this.seats = seats;
+    }
 }
 
 

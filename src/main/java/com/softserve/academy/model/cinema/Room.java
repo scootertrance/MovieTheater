@@ -1,5 +1,6 @@
 package com.softserve.academy.model.cinema;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.softserve.academy.model.cinema.util.RoomException;
 import com.softserve.academy.model.cinema.util.TypeOfSeat;
 
@@ -23,6 +24,9 @@ public class Room {
         this.seats = initializeSeats(rows, placesInRow);
     }
 
+    public Room() {
+    }
+
     private ArrayList<ArrayList<PhysicalSeat>> initializeSeats(int rows, int placesInRow) {
         ArrayList<ArrayList<PhysicalSeat>> seatsList = new ArrayList<>();
         for (int i = 0; i < rows; i++) {
@@ -34,7 +38,7 @@ public class Room {
         }
         return seatsList;
     }
-
+    @JsonIgnore
     public int getNumberOfSeats() {
         return this.placesInRow * this.rows;
     }
@@ -43,11 +47,11 @@ public class Room {
         return seats.get(row).get(place);
     }
 
-    public int getNumberOfPlacesInRow() {
+    public int getPlacesInRow() {
         return placesInRow;
     }
 
-    public int getNumberOfRows() {
+    public int getRows() {
         return rows;
     }
 

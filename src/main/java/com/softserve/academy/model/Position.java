@@ -11,6 +11,9 @@ public class Position {
         this.placeInRow = placeInRow;
     }
 
+    public Position() {
+    }
+
     public int getRow() {
         return row;
     }

@@ -5,6 +5,7 @@ import com.softserve.academy.model.Movie;
 import com.softserve.academy.model.Position;
 import com.softserve.academy.model.movieSession.MovieSession;
 import com.softserve.academy.model.movieSession.MovieSessionSeat;
+import com.softserve.academy.model.order.Order;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,12 @@ public class Output {
         for(MovieSession movieSession : orderController.getOrderDataSource().getMovieSessionDataSource().
                 getMovieSessionByMovieId(movieId)){
             System.out.println(movieSession);
+        }
+    }
+    public void printAllOrders(){
+        System.out.println("All orders from order datasource: ");
+        for(Order order : orderController.getOrderDataSource().getOrderList()){
+            System.out.println(order);
         }
     }
 }

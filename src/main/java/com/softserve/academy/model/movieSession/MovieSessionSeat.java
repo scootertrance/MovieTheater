@@ -11,6 +11,9 @@ public class MovieSessionSeat {
         this.available = available;
     }
 
+    public MovieSessionSeat() {
+    }
+
     public PhysicalSeat getPhysicalSeat() {
         return physicalSeat;
     }

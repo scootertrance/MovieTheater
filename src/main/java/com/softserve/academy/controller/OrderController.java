@@ -10,6 +10,7 @@ import com.softserve.academy.model.movieSession.MovieSessionSeat;
 import com.softserve.academy.model.order.Order;
 import com.softserve.academy.model.order.util.SeatAvailabilityException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +20,8 @@ public class OrderController {
 
     public OrderController(OrderDataSource orderDataSource) {
         this.orderDataSource = orderDataSource;
+
+
     }
 
     public OrderDataSource getOrderDataSource() {
@@ -183,7 +186,7 @@ public class OrderController {
     }
 
 
-    public void createOrderByClient(Scanner scan, Client client) {
+    public void createOrderByClient(Scanner scan, Client client) throws IOException {
         try {
             System.out.println("\nChoose a movie from the list:");
             printMovieList();
@@ -204,7 +207,6 @@ public class OrderController {
 
             orderDataSource.addNewOrder(newOrder);
             System.out.println("Your order is: "+ newOrder);
-            System.out.println(newOrder.getPositionsInfo(currentMovieSession.getSeatCoordinates()));
             System.out.println("available seats");
             System.out.println(currentMovieSession.getNumberAvailableSeats());
 

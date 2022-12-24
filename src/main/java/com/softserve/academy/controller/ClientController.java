@@ -3,17 +3,18 @@ package com.softserve.academy.controller;
 import com.softserve.academy.dataSource.ClientDataSource;
 import com.softserve.academy.model.client.Client;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ClientController {
     private ClientDataSource clientDataSource = new ClientDataSource();
 
-    public ClientController(ClientDataSource clientDataSource) {
+    public ClientController(ClientDataSource clientDataSource) throws IOException {
         this.clientDataSource = clientDataSource;
     }
 
-    public Client createNewClient(String name, String surname, String email) {
+    public Client createNewClient(String name, String surname, String email) throws IOException {
         Client client = new Client(clientDataSource.getNewClientId(), name, surname, email);
         clientDataSource.addNewClient(client);
         return client;
@@ -42,7 +43,7 @@ public class ClientController {
                     System.out.println("You entered wrong data.");
                     System.exit(0);
             }
-        } catch (InputMismatchException exc) {
+        } catch (InputMismatchException | IOException exc) {
             System.out.println("You entered wrong data.");
         }
         return null;

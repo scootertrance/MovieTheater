@@ -8,4 +8,15 @@ public class PhysicalSeat {
     public PhysicalSeat(TypeOfSeat type) {
         this.type = type;
     }
+
+    public PhysicalSeat() {
+    }
+
+    public TypeOfSeat getType() {
+        return type;
+    }
+
+    public void setType(TypeOfSeat type) {
+        this.type = type;
+    }
 }
