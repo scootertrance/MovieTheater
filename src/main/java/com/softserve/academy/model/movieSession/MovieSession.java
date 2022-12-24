@@ -42,7 +42,7 @@ public class MovieSession {
             ArrayList<MovieSessionSeat> row = new ArrayList<>();
 
             for (int j = 0; j < room.getPlacesInRow(); j++) {
-                row.add(new MovieSessionSeat(room.getSeat(i,j),true));
+                row.add(new MovieSessionSeat(room.getSeat(i,j),true, new Position(i,j)));
             }
 
             seatsList.add(row);
@@ -138,22 +138,22 @@ public class MovieSession {
 
 
 
-    public ArrayList<Position> getSeatCoordinates(ArrayList<MovieSessionSeat> orderSeats){
-        ArrayList<Position> positionArrayList = new ArrayList<>();
-        for (int i = 0; i < seats.size(); i++) {
-            for (int j = 0; j < seats.get(i).size(); j++) {
-                if(!seats.get(i).get(j).isAvailable()){
-                    for (int k = 0; k < orderSeats.size(); k++) {
-                        if(seats.get(i).get(j).equals(orderSeats.get(k))){
-                            positionArrayList.add(new Position(i,j));
-                        }
-                    }
-
-                }
-            }
-        }
-        return positionArrayList;
-    }
+//    public ArrayList<Position> getSeatCoordinates(ArrayList<MovieSessionSeat> orderSeats){
+//        ArrayList<Position> positionArrayList = new ArrayList<>();
+//        for (int i = 0; i < seats.size(); i++) {
+//            for (int j = 0; j < seats.get(i).size(); j++) {
+//                if(!seats.get(i).get(j).isAvailable()){
+//                    for (int k = 0; k < orderSeats.size(); k++) {
+//                        if(seats.get(i).get(j).equals(orderSeats.get(k))){
+//                            positionArrayList.add(new Position(i,j));
+//                        }
+//                    }
+//
+//                }
+//            }
+//        }
+//        return positionArrayList;
+//    }
 
     @Override
     public String toString() {

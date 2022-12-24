@@ -1,5 +1,6 @@
 package com.softserve.academy.model.movieSession;
 
+import com.softserve.academy.model.Position;
 import com.softserve.academy.model.cinema.PhysicalSeat;
 
 import java.util.Objects;
@@ -7,10 +8,12 @@ import java.util.Objects;
 public class MovieSessionSeat {
     private PhysicalSeat physicalSeat;
     private boolean available;
+    private Position position;
 
-    public MovieSessionSeat(PhysicalSeat physicalSeat, boolean available) {
+    public MovieSessionSeat(PhysicalSeat physicalSeat, boolean available, Position position) {
         this.physicalSeat = physicalSeat;
         this.available = available;
+        this.position = position;
     }
 
     public MovieSessionSeat() {
@@ -28,5 +31,7 @@ public class MovieSessionSeat {
         this.available = available;
     }
 
-
+    public Position getPosition() {
+        return position;
+    }
 }

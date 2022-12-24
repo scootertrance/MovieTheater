@@ -72,18 +72,18 @@ public class Order  {
         return movieSession;
     }
 
-    public String getPositionsInfo(ArrayList<Position> positions){
+    public String getPositionsInfo(ArrayList<MovieSessionSeat> seats){
         StringBuilder sb = new StringBuilder();
         int count = 0;
         sb.append("\nYour seats:\n");
-        for(Position position : positions){
+        for(MovieSessionSeat seat : seats){
             count++;
             sb.append("\n---------\nSeat № ");
             sb.append(count);
             sb.append(":\nRow: ");
-            sb.append(position.getRow());
+            sb.append(seat.getPosition().getRow());
             sb.append("\nPlace: ");
-            sb.append(position.getPlaceInRow());
+            sb.append(seat.getPosition().getPlaceInRow());
         }
         sb.append("\n---------\n");
         return sb.toString();
@@ -95,7 +95,7 @@ public class Order  {
         return String.format("\nOrder id: %d\nMovie: %s\nRoom: %d\nTotal price: %.2f UAH\nOrder date: %s\nClient: %s %s, %s %s",
                 this.getId(),this.getMovieSession().getMovie().getTitle(), this.getMovieSession().getRoom().getRoomNumber(),
                 this.getTotalPrice(),this.getOrderDate(),this.client.getName(), this.client.getSurname(),
-                this.getClient().getEmail(), this.getPositionsInfo(this.movieSession.getSeatCoordinates(seats)));
+                this.getClient().getEmail(), this.getPositionsInfo(seats));
     }
 
 }
