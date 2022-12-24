@@ -47,7 +47,6 @@ public class Order  {
         return seats.size();
     }
 
-
     @JsonIgnore
     public double getTotalPrice() {
         return Math.round(getNumberOfSeats() * this.movieSession.getPrice() * 100) / 100;
@@ -96,7 +95,7 @@ public class Order  {
         return String.format("\nOrder id: %d\nMovie: %s\nRoom: %d\nTotal price: %.2f UAH\nOrder date: %s\nClient: %s %s, %s %s",
                 this.getId(),this.getMovieSession().getMovie().getTitle(), this.getMovieSession().getRoom().getRoomNumber(),
                 this.getTotalPrice(),this.getOrderDate(),this.client.getName(), this.client.getSurname(),
-                this.getClient().getEmail(), this.getPositionsInfo(movieSession.getSeatCoordinates(seats)));
+                this.getClient().getEmail(), this.getPositionsInfo(this.movieSession.getSeatCoordinates(seats)));
     }
 
 }

@@ -22,6 +22,7 @@ public class MovieSession {
     private double price;
     private ArrayList<ArrayList<MovieSessionSeat>> seats;
 
+
     public MovieSession(int id, Movie movie, Room room, LocalDateTime dateTime, double price) {
         this.id = id;
         this.movie = movie;

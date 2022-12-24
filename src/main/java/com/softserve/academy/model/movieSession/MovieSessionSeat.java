@@ -2,6 +2,8 @@ package com.softserve.academy.model.movieSession;
 
 import com.softserve.academy.model.cinema.PhysicalSeat;
 
+import java.util.Objects;
+
 public class MovieSessionSeat {
     private PhysicalSeat physicalSeat;
     private boolean available;
@@ -25,4 +27,6 @@ public class MovieSessionSeat {
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+
 }
