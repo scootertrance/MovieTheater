@@ -127,8 +127,6 @@ public class OrderController {
         ArrayList<Position> positionArrayList = new ArrayList<>();
         boolean chooseAnotherPlace = true;
 
-
-
         while (chooseAnotherPlace) {
             System.out.println("Choose a row:");
             int row = scan.nextInt();

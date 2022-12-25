@@ -35,8 +35,27 @@ public class ClientController {
                     String name = scan.next();
                     System.out.println("Enter a surname:");
                     String surname = scan.next();
-                    System.out.println("Enter an email :");
-                    String email = scan.next();
+                    String email = "";
+                    System.out.println("Enter an email or enter 'exit' for exit");
+
+                    while (true) {
+
+                        if (scan.hasNext("exit")) {
+                            System.out.println("End of the program.");
+                            System.exit(0);
+                        }
+
+                        email = scan.next();
+
+                        if (email.matches("\\w+(\\.\\w+)*@(\\w+\\.)+\\w+")) {
+                            break;
+                        }
+
+                        else {
+                            System.out.println("You entered wrong data. Please enter correct data or enter 'exit' for exit:");
+                        }
+                    }
+
                     Client currentClient = createNewClient(name, surname, email);
                     return currentClient;
                 default:

@@ -3,7 +3,6 @@ package com.softserve.academy;
 import com.softserve.academy.model.cinema.util.RoomException;
 import com.softserve.academy.model.order.util.SeatAvailabilityException;
 import com.softserve.academy.program.Program;
-
 import java.io.IOException;
 
 public class App {
