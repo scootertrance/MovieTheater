@@ -1,4 +1,4 @@
-package com.softserve.academy;
+package com.softserve.academy.view;
 
 import com.softserve.academy.controller.OrderController;
 import com.softserve.academy.model.Movie;

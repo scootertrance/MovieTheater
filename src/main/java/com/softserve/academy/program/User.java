@@ -1,4 +1,4 @@
-package com.softserve.academy;
+package com.softserve.academy.program;
 
 import com.softserve.academy.controller.ClientController;
 import com.softserve.academy.controller.OrderController;
@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-public class ClientApp {
-    public static void main(String[] args) throws SeatAvailabilityException, RoomException, IOException {
+public class User {
+    public static void runUser() throws SeatAvailabilityException, RoomException, IOException {
         Scanner scan = new Scanner(System.in);
         OrderDataSource orderDataSource = new OrderDataSource();
         ClientDataSource clientDataSource = orderDataSource.getClientDataSource();
@@ -22,6 +22,5 @@ public class ClientApp {
         ClientController clientController = new ClientController(clientDataSource);
         Client currentClient = clientController.enterClientData(scan);
         orderController.createOrderByClient(scan, currentClient);
-
     }
 }
