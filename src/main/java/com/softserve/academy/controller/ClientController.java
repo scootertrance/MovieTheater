@@ -27,14 +27,31 @@ public class ClientController {
 
             switch (response) {
                 case "e":
-                    System.out.println("Enter client id:");
-                    int clientId = scan.nextInt();
-                    return clientDataSource.getClientById(clientId);
+                    System.out.println("Enter client id or enter 'exit' for exit: ");
+
+                    while (true) {
+
+                        if (scan.hasNext("exit")) {
+                            System.out.println("End of the program.");
+                            System.exit(0);
+                        }
+
+                        int clientId = scan.nextInt();
+
+                        if (clientDataSource.getClientById(clientId) != null) {
+                            return clientDataSource.getClientById(clientId);
+                        }
+                        else {
+                            System.out.println("You entered wrong data. Please enter correct data or enter 'exit' for exit:");
+                        }
+                    }
+
                 case "n":
+                    scan.nextLine();
                     System.out.println("Enter a name:");
-                    String name = scan.next();
+                    String name = scan.nextLine();
                     System.out.println("Enter a surname:");
-                    String surname = scan.next();
+                    String surname = scan.nextLine();
                     String email = "";
                     System.out.println("Enter an email or enter 'exit' for exit");
 
@@ -64,6 +81,7 @@ public class ClientController {
             }
         } catch (InputMismatchException | IOException exc) {
             System.out.println("You entered wrong data.");
+            System.exit(0);
         }
         return null;
     }
