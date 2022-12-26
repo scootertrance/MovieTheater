@@ -3,7 +3,6 @@ package com.softserve.academy.dataSource;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserve.academy.model.client.Client;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

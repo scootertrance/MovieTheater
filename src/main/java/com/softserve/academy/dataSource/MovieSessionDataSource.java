@@ -1,10 +1,7 @@
 package com.softserve.academy.dataSource;
 
-import com.softserve.academy.model.Movie;
 import com.softserve.academy.model.cinema.util.RoomException;
-import com.softserve.academy.model.client.Client;
 import com.softserve.academy.model.movieSession.MovieSession;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 

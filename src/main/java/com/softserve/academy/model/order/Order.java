@@ -7,8 +7,6 @@ import com.softserve.academy.model.client.Client;
 import com.softserve.academy.model.movieSession.MovieSession;
 import com.softserve.academy.model.movieSession.MovieSessionSeat;
 import com.softserve.academy.model.order.util.SeatAvailabilityException;
-
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -88,7 +86,6 @@ public class Order  {
         sb.append("\n---------\n");
         return sb.toString();
     }
-
 
     @Override
     public String toString() {

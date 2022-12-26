@@ -1,6 +1,5 @@
 package com.softserve.academy.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {

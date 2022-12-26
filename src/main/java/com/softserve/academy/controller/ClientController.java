@@ -2,7 +2,6 @@ package com.softserve.academy.controller;
 
 import com.softserve.academy.dataSource.ClientDataSource;
 import com.softserve.academy.model.client.Client;
-
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;

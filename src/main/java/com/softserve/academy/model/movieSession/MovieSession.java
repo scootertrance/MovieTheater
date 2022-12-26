@@ -1,14 +1,12 @@
 package com.softserve.academy.model.movieSession;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softserve.academy.model.Movie;
 import com.softserve.academy.model.Position;
 import com.softserve.academy.model.cinema.PhysicalSeat;
 import com.softserve.academy.model.cinema.Room;
 import com.softserve.academy.model.cinema.util.RoomException;
 import com.softserve.academy.model.movieSession.util.MovieSessionException;
-
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -50,8 +48,6 @@ public class MovieSession {
         return seatsList;
     }
 
-
-
     public void setId(int id) throws MovieSessionException {
         if (id < 0)
             throw new MovieSessionException("Movie session ID cannot be negative");
@@ -61,22 +57,6 @@ public class MovieSession {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
-
-//    public void setRoom(Room room) {
-//        this.room = room;
-//        if (seats.size() != 0) {
-//            seats.removeAll(seats);
-//        }
-//        for (int i = 0; i < room.getRows(); i++) {
-//            ArrayList<MovieSessionSeat> row = new ArrayList<>();
-//
-//            for (int j = 0; j < room.placesInRow(); j++) {
-//                row.add(new MovieSessionSeat(room.getSeat(i, j), true));
-//            }
-//            seats.add(row);
-//        }
-//    }
-
 
     public void setRoom(Room room) {
         this.room = room;
@@ -135,25 +115,6 @@ public class MovieSession {
     public PhysicalSeat getPhysicalSeat(int row, int place) throws RoomException {
         return this.getSeats().get(row).get(place).getPhysicalSeat();
     }
-
-
-
-//    public ArrayList<Position> getSeatCoordinates(ArrayList<MovieSessionSeat> orderSeats){
-//        ArrayList<Position> positionArrayList = new ArrayList<>();
-//        for (int i = 0; i < seats.size(); i++) {
-//            for (int j = 0; j < seats.get(i).size(); j++) {
-//                if(!seats.get(i).get(j).isAvailable()){
-//                    for (int k = 0; k < orderSeats.size(); k++) {
-//                        if(seats.get(i).get(j).equals(orderSeats.get(k))){
-//                            positionArrayList.add(new Position(i,j));
-//                        }
-//                    }
-//
-//                }
-//            }
-//        }
-//        return positionArrayList;
-//    }
 
     @Override
     public String toString() {

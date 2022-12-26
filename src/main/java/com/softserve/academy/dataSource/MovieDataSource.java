@@ -1,7 +1,6 @@
 package com.softserve.academy.dataSource;
 
 import com.softserve.academy.model.Movie;
-
 import java.util.ArrayList;
 import java.util.List;
 

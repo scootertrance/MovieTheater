@@ -1,7 +1,6 @@
 package com.softserve.academy.model.cinema;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.softserve.academy.model.cinema.util.RoomException;
 import com.softserve.academy.model.cinema.util.TypeOfSeat;
 
 import java.util.ArrayList;
@@ -13,11 +12,9 @@ public class Room {
     private int rows;
     private ArrayList<ArrayList<PhysicalSeat>> seats;
 
-    public Room(int roomNumber, int rows, int placesInRow) throws RoomException {
+    public Room(int roomNumber, int rows, int placesInRow)  {
 
-//        if(rows <= 0 || placesInRow <= 0) {
-//            throw new RoomException("The room must contain at least one seat");
-//        }
+
         this.roomNumber = roomNumber;
         this.placesInRow = placesInRow;
         this.rows = rows;

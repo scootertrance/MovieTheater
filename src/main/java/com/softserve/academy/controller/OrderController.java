@@ -9,7 +9,6 @@ import com.softserve.academy.model.movieSession.MovieSession;
 import com.softserve.academy.model.movieSession.MovieSessionSeat;
 import com.softserve.academy.model.order.Order;
 import com.softserve.academy.model.order.util.SeatAvailabilityException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;

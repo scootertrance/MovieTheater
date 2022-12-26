@@ -2,8 +2,6 @@ package com.softserve.academy.program;
 
 import com.softserve.academy.model.cinema.util.RoomException;
 import com.softserve.academy.model.order.util.SeatAvailabilityException;
-import com.softserve.academy.program.Admin;
-import com.softserve.academy.program.User;
 
 import java.io.IOException;
 import java.util.Scanner;

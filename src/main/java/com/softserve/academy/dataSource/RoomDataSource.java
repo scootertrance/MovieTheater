@@ -1,6 +1,5 @@
 package com.softserve.academy.dataSource;
 
-import com.softserve.academy.model.Movie;
 import com.softserve.academy.model.cinema.Room;
 import com.softserve.academy.model.cinema.util.RoomException;
 
