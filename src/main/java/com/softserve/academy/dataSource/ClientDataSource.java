@@ -20,6 +20,7 @@ public class ClientDataSource {
         clientList = mapper.readValue(new File(
                         "src/main/java/com/softserve/academy/resources/clientList.json"),
                 new TypeReference<>() {});
+
     }
 
 
